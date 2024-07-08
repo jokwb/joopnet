@@ -103,7 +103,7 @@ def lst2xray(lst: list, precision: Reportprecision) -> xr.DataArray:
                     or "-" in c
                     and (c["-"] > 1 or item[0] != "-" and item[0].isnumeric())
             ) and (
-                    index > 1
+                    index >= 1
             ):
                 new_items = split_item(item)
                 new_entry.extend(new_items)
