@@ -106,8 +106,8 @@ class Network:
         """
         return write(self, filename)
 
-    def to_string(self) -> str:
-        return to_string(self)
+    def to_string(self, **kwargs) -> str:
+        return to_string(self, **kwargs)
 
     def run(
         self,
