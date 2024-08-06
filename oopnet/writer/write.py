@@ -52,7 +52,7 @@ def write(network: Network, filename: str) -> int:
 
 
 @logging_decorator(logger)
-def to_string(network: Network) -> str:
+def to_string(network: Network, as_buffer: bool = False) -> str:
     """Converts an OOPNET network to an EPANET input file and returns it as a string.
 
     Args:
@@ -78,10 +78,12 @@ def to_string(network: Network) -> str:
     for f in newlist:
         f.writerfunction(network, string_buffer)
 
+    if as_buffer:
+        return string_buffer
+
     content = string_buffer.getvalue()
 
     string_buffer.close()
 
     return content
-
 
