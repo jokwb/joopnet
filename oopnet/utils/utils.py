@@ -2,11 +2,11 @@ from __future__ import annotations
 import os
 from typing import Optional, TYPE_CHECKING
 from copy import deepcopy
-
 import numpy as np
 
 if TYPE_CHECKING:
     from oopnet.elements.network_components import Junction, Pipe
+    from oopnet.elements.network import Network
 from oopnet.report.report import SimulationReport
 
 

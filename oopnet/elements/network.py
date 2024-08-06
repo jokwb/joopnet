@@ -10,7 +10,7 @@ if TYPE_CHECKING:
     from matplotlib.animation import FuncAnimation
     import pandas as pd
 
-from oopnet.writer.write import write
+from oopnet.writer.write import write, to_string
 from oopnet.reader.read import read
 from oopnet.plotter.pyplot import NetworkPlotter
 from oopnet.plotter.bokehplot import Plotsimulation as BokehPlot
@@ -105,6 +105,9 @@ class Network:
 
         """
         return write(self, filename)
+
+    def to_string(self) -> str:
+        return to_string(self)
 
     def run(
         self,

@@ -1,6 +1,7 @@
 from __future__ import annotations
 from typing import TYPE_CHECKING
 import logging
+import io
 
 from oopnet.writer.module_reader import list_section_writer_callables
 from oopnet.writer.writing_modules import (
@@ -48,3 +49,39 @@ def write(network: Network, filename: str) -> int:
             f.writerfunction(network, fid)
 
     return 0
+
+
+@logging_decorator(logger)
+def to_string(network: Network) -> str:
+    """Converts an OOPNET network to an EPANET input file and returns it as a string.
+
+    Args:
+    network: OOPNET network object
+
+    Returns:
+    str
+    """
+
+    modules = [
+    write_network_components,
+    write_network_map_tags,
+    write_options_and_reporting,
+    write_system_operation,
+    write_water_quality,
+    ]
+
+    all_functions = list_section_writer_callables(modules)
+
+    newlist = sorted(all_functions, key=lambda x: x.priority)
+
+    string_buffer = io.StringIO()
+    for f in newlist:
+        f.writerfunction(network, string_buffer)
+
+    content = string_buffer.getvalue()
+
+    string_buffer.close()
+
+    return content
+
+
